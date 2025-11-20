@@ -203,9 +203,9 @@ def erstelle_ampel_anzeige(
 
     # Border für aktive Phase (6px dunkelgrau), inaktive Phase (6px Hintergrundfarbe)
     # Damit alle Phasen gleich groß bleiben
-    rot_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "rot" else ft.border.all(6, ft.Colors.GREY_200)
-    gelb_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "gelb" else ft.border.all(6, ft.Colors.GREY_200)
-    gruen_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "grün" else ft.border.all(6, ft.Colors.GREY_200)
+    rot_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "rot" else ft.border.all(6, ft.Colors.GREY_300)
+    gelb_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "gelb" else ft.border.all(6, ft.Colors.GREY_300)
+    gruen_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "grün" else ft.border.all(6, ft.Colors.GREY_300)
 
     return ft.Container(
         content=ft.Column(
