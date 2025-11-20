@@ -209,44 +209,35 @@ def erstelle_ampel_anzeige(
     return ft.Container(
         content=ft.Column(
             controls=[
-                # Rot (oben)
+                # Rot (oben) - als Container mit bgcolor statt Icon
                 ft.Container(
-                    content=ft.Icon(
-                        name=ft.Icons.CIRCLE,
-                        color=ft.Colors.RED,
-                        size=groesse,
-                        opacity=rot_opacity
-                    ),
-                    alignment=ft.alignment.center,
-                    padding=0,
+                    width=groesse,
+                    height=groesse,
+                    bgcolor=ft.Colors.RED,
+                    opacity=rot_opacity,
                     border=rot_border,
-                    border_radius=40
+                    border_radius=groesse // 2,  # Perfekt rund
+                    alignment=ft.alignment.center
                 ),
-                # Gelb (mitte)
+                # Gelb (mitte) - als Container mit bgcolor statt Icon
                 ft.Container(
-                    content=ft.Icon(
-                        name=ft.Icons.CIRCLE,
-                        color=ft.Colors.AMBER,
-                        size=groesse,
-                        opacity=gelb_opacity
-                    ),
-                    alignment=ft.alignment.center,
-                    padding=0,
+                    width=groesse,
+                    height=groesse,
+                    bgcolor=ft.Colors.AMBER,
+                    opacity=gelb_opacity,
                     border=gelb_border,
-                    border_radius=40
+                    border_radius=groesse // 2,  # Perfekt rund
+                    alignment=ft.alignment.center
                 ),
-                # Grün (unten)
+                # Grün (unten) - als Container mit bgcolor statt Icon
                 ft.Container(
-                    content=ft.Icon(
-                        name=ft.Icons.CIRCLE,
-                        color=ft.Colors.GREEN,
-                        size=groesse,
-                        opacity=gruen_opacity
-                    ),
-                    alignment=ft.alignment.center,
-                    padding=0,
+                    width=groesse,
+                    height=groesse,
+                    bgcolor=ft.Colors.GREEN,
+                    opacity=gruen_opacity,
                     border=gruen_border,
-                    border_radius=40
+                    border_radius=groesse // 2,  # Perfekt rund
+                    alignment=ft.alignment.center
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
