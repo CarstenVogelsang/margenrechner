@@ -183,13 +183,14 @@ def erstelle_ampel_anzeige(
     """
     Erstellt eine echte Ampel-Anzeige mit 3 Farben (rot/gelb/grün).
     Die aktive Farbe leuchtet hell, die anderen sind gedimmt.
+    Optisch gestaltet wie eine echte Ampel mit schwarzem Gehäuse.
 
     Args:
         status: Ampel-Status ("rot", "gelb", "grün")
         groesse: Größe jeder Ampel-Lampe in Pixeln
 
     Returns:
-        Flet Container mit 3-farbiger Ampel
+        Flet Container mit 3-farbiger Ampel im schwarzen Gehäuse
     """
     status_lower = status.lower()
     if status_lower == "gruen":
@@ -211,7 +212,8 @@ def erstelle_ampel_anzeige(
                         size=groesse,
                         opacity=rot_opacity
                     ),
-                    alignment=ft.alignment.center
+                    alignment=ft.alignment.center,
+                    padding=8
                 ),
                 # Gelb (mitte)
                 ft.Container(
@@ -221,7 +223,8 @@ def erstelle_ampel_anzeige(
                         size=groesse,
                         opacity=gelb_opacity
                     ),
-                    alignment=ft.alignment.center
+                    alignment=ft.alignment.center,
+                    padding=8
                 ),
                 # Grün (unten)
                 ft.Container(
@@ -231,14 +234,18 @@ def erstelle_ampel_anzeige(
                         size=groesse,
                         opacity=gruen_opacity
                     ),
-                    alignment=ft.alignment.center
+                    alignment=ft.alignment.center,
+                    padding=8
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            spacing=8
+            spacing=4
         ),
-        alignment=ft.alignment.center,
-        padding=10
+        # Schwarzes Gehäuse wie eine echte Ampel
+        bgcolor=ft.Colors.BLACK87,
+        border_radius=15,
+        padding=15,
+        alignment=ft.alignment.center
     )
 
 

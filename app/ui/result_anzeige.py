@@ -42,13 +42,13 @@ class ErgebnisAnzeige(ft.Container):
             "",
             size=18,
             weight=ft.FontWeight.BOLD,
-            text_align=ft.TextAlign.CENTER
+            text_align=ft.TextAlign.LEFT
         )
         self.ampel_beschreibung = ft.Text(
             "",
             size=14,
             color=ft.Colors.GREY_700,
-            text_align=ft.TextAlign.CENTER
+            text_align=ft.TextAlign.LEFT
         )
 
         # Layout aufbauen
@@ -90,14 +90,26 @@ class ErgebnisAnzeige(ft.Container):
                         size=16,
                         weight=ft.FontWeight.BOLD
                     ),
-                    ft.Column(
+                    # Ampel links, Text rechts (vertikal zentriert)
+                    ft.Row(
                         controls=[
+                            # Ampel-Widget
                             self.ampel_widget,
-                            self.ampel_text,
-                            self.ampel_beschreibung
+                            # Text-Bereich (vertikal zentriert, linksbündig)
+                            ft.Column(
+                                controls=[
+                                    self.ampel_text,
+                                    self.ampel_beschreibung
+                                ],
+                                alignment=ft.MainAxisAlignment.CENTER,
+                                horizontal_alignment=ft.CrossAxisAlignment.START,
+                                spacing=5,
+                                expand=True
+                            )
                         ],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=5
+                        alignment=ft.MainAxisAlignment.START,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=20
                     )
                 ],
                 spacing=12
@@ -257,14 +269,26 @@ class ErgebnisAnzeige(ft.Container):
                         size=16,
                         weight=ft.FontWeight.BOLD
                     ),
-                    ft.Column(
+                    # Ampel links, Text rechts (vertikal zentriert)
+                    ft.Row(
                         controls=[
+                            # Ampel-Widget
                             self.ampel_widget,
-                            self.ampel_text,
-                            self.ampel_beschreibung
+                            # Text-Bereich (vertikal zentriert, linksbündig)
+                            ft.Column(
+                                controls=[
+                                    self.ampel_text,
+                                    self.ampel_beschreibung
+                                ],
+                                alignment=ft.MainAxisAlignment.CENTER,
+                                horizontal_alignment=ft.CrossAxisAlignment.START,
+                                spacing=5,
+                                expand=True
+                            )
                         ],
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        spacing=5
+                        alignment=ft.MainAxisAlignment.START,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        spacing=20
                     )
                 ],
                 spacing=12
