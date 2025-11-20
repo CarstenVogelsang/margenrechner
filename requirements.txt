@@ -5,6 +5,7 @@
 flet>=0.24.0
 
 # Web-Server für Production Deployment
+flet-web>=0.24.0
 uvicorn>=0.24.0
 fastapi>=0.104.0
 
