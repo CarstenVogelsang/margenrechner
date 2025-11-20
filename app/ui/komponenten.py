@@ -202,9 +202,9 @@ def erstelle_ampel_anzeige(
     gruen_opacity = 1.0 if status_lower == "grün" else 0.2
 
     # Border für aktive Phase (6px dunkelgrau wie Ampelrahmen)
-    rot_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "rot" else None
-    gelb_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "gelb" else None
-    gruen_border = ft.border.all(6, ft.Colors.GREY_700) if status_lower == "grün" else None
+    rot_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "rot" else None
+    gelb_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "gelb" else None
+    gruen_border = ft.border.all(6, ft.Colors.GREY_500) if status_lower == "grün" else None
 
     return ft.Container(
         content=ft.Column(
@@ -218,7 +218,7 @@ def erstelle_ampel_anzeige(
                         opacity=rot_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4,
+                    padding=0,
                     border=rot_border,
                     border_radius=50
                 ),
@@ -231,7 +231,7 @@ def erstelle_ampel_anzeige(
                         opacity=gelb_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4,
+                    padding=0,
                     border=gelb_border,
                     border_radius=50
                 ),
@@ -244,7 +244,7 @@ def erstelle_ampel_anzeige(
                         opacity=gruen_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4,
+                    padding=0,
                     border=gruen_border,
                     border_radius=50
                 ),
