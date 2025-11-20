@@ -36,12 +36,24 @@ if __name__ == "__main__":
     # Host-Adresse (0.0.0.0 für externe Erreichbarkeit im Deployment)
     host = os.environ.get("HOST", "0.0.0.0")
 
+    # Erkenne Umgebung: Produktions-Deployment oder lokale Entwicklung
+    # Wenn PORT gesetzt ist, laufen wir im Deployment (Coolify/Cloud)
+    is_production = "PORT" in os.environ
+
+    # View-Modus basierend auf Umgebung
+    if is_production:
+        # Produktions-Deployment: Als reiner Web-Server ohne Browser
+        view_mode = ft.AppView.WEB_SERVER
+        print(f"🚀 Starting Flet in PRODUCTION mode (Web Server) on {host}:{port}")
+    else:
+        # Lokale Entwicklung: Browser öffnet sich automatisch
+        view_mode = ft.AppView.WEB_BROWSER
+        print(f"🔧 Starting Flet in DEVELOPMENT mode (Web Browser) on {host}:{port}")
+
     # Anwendung starten
-    # Im Produktions-Deployment: Als Web-Server
-    # Lokal: Browser öffnet sich automatisch
     ft.app(
         target=main,
-        view=ft.AppView.WEB_BROWSER,
+        view=view_mode,
         port=port,
         host=host
     )
