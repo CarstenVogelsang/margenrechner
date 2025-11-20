@@ -4,6 +4,10 @@
 # Haupt-Framework
 flet>=0.24.0
 
+# Web-Server für Production Deployment
+uvicorn>=0.24.0
+fastapi>=0.104.0
+
 # Für zukünftige API-Integration (auskommentiert, da noch nicht verwendet)
 # aiohttp>=3.9.0
 # requests>=2.31.0

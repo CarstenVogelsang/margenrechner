@@ -14,6 +14,7 @@ projekt_root = Path(__file__).parent
 sys.path.insert(0, str(projekt_root))
 
 import flet as ft
+from flet.fastapi import app as flet_fastapi
 from app.ui.layout_main import HauptLayout
 
 
@@ -29,6 +30,9 @@ def main(page: ft.Page):
     layout.zeige()
 
 
+# FastAPI-App für Production (Uvicorn)
+app = flet_fastapi(session_handler=main)
+
 if __name__ == "__main__":
     # Port aus Umgebungsvariable lesen (für Coolify/Cloud-Deployment)
     port = int(os.environ.get("PORT", 8550))
@@ -40,20 +44,17 @@ if __name__ == "__main__":
     # Wenn PORT gesetzt ist, laufen wir im Deployment (Coolify/Cloud)
     is_production = "PORT" in os.environ
 
-    # View-Modus basierend auf Umgebung
     if is_production:
-        # Produktions-Deployment: Als Flet-App (Web-Server ohne Browser)
-        view_mode = ft.AppView.FLET_APP
-        print(f"🚀 Starting Flet in PRODUCTION mode (Flet App) on {host}:{port}")
+        # Produktions-Deployment: Uvicorn verwendet die FastAPI-App automatisch
+        print(f"🚀 Starting Flet with Uvicorn in PRODUCTION mode on {host}:{port}")
+        import uvicorn
+        uvicorn.run(app, host=host, port=port)
     else:
         # Lokale Entwicklung: Browser öffnet sich automatisch
-        view_mode = ft.AppView.WEB_BROWSER
         print(f"🔧 Starting Flet in DEVELOPMENT mode (Web Browser) on {host}:{port}")
-
-    # Anwendung starten
-    ft.app(
-        target=main,
-        view=view_mode,
-        port=port,
-        host=host
-    )
+        ft.app(
+            target=main,
+            view=ft.AppView.WEB_BROWSER,
+            port=port,
+            host=host
+        )
