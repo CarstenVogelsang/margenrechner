@@ -220,7 +220,7 @@ def erstelle_ampel_anzeige(
                     alignment=ft.alignment.center,
                     padding=0,
                     border=rot_border,
-                    border_radius=50
+                    border_radius=46
                 ),
                 # Gelb (mitte)
                 ft.Container(
@@ -233,7 +233,7 @@ def erstelle_ampel_anzeige(
                     alignment=ft.alignment.center,
                     padding=0,
                     border=gelb_border,
-                    border_radius=50
+                    border_radius=46
                 ),
                 # Grün (unten)
                 ft.Container(
@@ -246,7 +246,7 @@ def erstelle_ampel_anzeige(
                     alignment=ft.alignment.center,
                     padding=0,
                     border=gruen_border,
-                    border_radius=50
+                    border_radius=46
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
