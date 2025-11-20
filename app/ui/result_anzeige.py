@@ -37,7 +37,7 @@ class ErgebnisAnzeige(ft.Container):
         self.rohertrag_prozent_text = ft.Text("—", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PRIMARY)
 
         # Ampel-Anzeige - größer und prominenter
-        self.ampel_widget = ui.erstelle_ampel_anzeige("rot", groesse=80)
+        self.ampel_widget = ui.erstelle_ampel_anzeige("rot", groesse=60)
         self.ampel_text = ft.Text(
             "",
             size=18,

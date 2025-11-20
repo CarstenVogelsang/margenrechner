@@ -213,7 +213,7 @@ def erstelle_ampel_anzeige(
                         opacity=rot_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4
+                    padding=2
                 ),
                 # Gelb (mitte)
                 ft.Container(
@@ -224,7 +224,7 @@ def erstelle_ampel_anzeige(
                         opacity=gelb_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4
+                    padding=2
                 ),
                 # Grün (unten)
                 ft.Container(
@@ -235,17 +235,17 @@ def erstelle_ampel_anzeige(
                         opacity=gruen_opacity
                     ),
                     alignment=ft.alignment.center,
-                    padding=4
+                    padding=2
                 ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             spacing=2
         ),
         # Helles Gehäuse mit dunkelgrauem Rahmen
-        bgcolor=ft.Colors.GREY_200,
-        border=ft.border.all(6, ft.Colors.GREY_700),
-        border_radius=15,
-        padding=15,
+        bgcolor=ft.Colors.GREY_300,
+        border=ft.border.all(6, ft.Colors.GREY_500),
+        border_radius=10,
+        padding=10,
         alignment=ft.alignment.center
     )
 
