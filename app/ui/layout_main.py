@@ -53,7 +53,7 @@ class HauptLayout:
         """
         # AppBar (Kopfzeile)
         self.page.appbar = ft.AppBar(
-            title=ft.Text(strings.APP_TITEL, size=20, weight=ft.FontWeight.BOLD),
+            title=ft.Text(strings.APP_TITEL, size=24, weight=ft.FontWeight.BOLD),
             bgcolor=ft.Colors.PRIMARY,
             color=ft.Colors.WHITE,
             center_title=False,
@@ -80,8 +80,8 @@ class HauptLayout:
             vertical_alignment=ft.CrossAxisAlignment.START
         )
 
-        # Haupt-Container mit Scrolling
-        haupt_container = ft.Container(
+        # Haupt-Container mit Scrolling und maximaler Breite (Boxed Layout)
+        content_container = ft.Container(
             content=ft.Column(
                 controls=[
                     self.haupt_row
@@ -93,8 +93,32 @@ class HauptLayout:
             expand=True
         )
 
+        # Äußerer Container für Zentrierung mit max_width
+        outer_container = ft.Container(
+            content=content_container,
+            alignment=ft.alignment.top_center,
+            expand=True
+        )
+
         # Zur Page hinzufügen
-        self.page.add(haupt_container)
+        self.page.add(outer_container)
+
+        # Maximale Breite setzen (responsive: nur auf großen Bildschirmen)
+        self.page.on_resize = lambda _: self._update_max_width()
+        self._update_max_width()
+
+    def _update_max_width(self):
+        """
+        Aktualisiert die maximale Breite basierend auf der Fenstergröße.
+        Auf großen Bildschirmen: max 1400px, zentriert
+        Auf kleinen Bildschirmen: volle Breite
+        """
+        if self.page.width and self.page.width > 1400:
+            # Desktop: Zentriert mit max_width
+            self.haupt_row.width = 1400
+        else:
+            # Mobile/Tablet: Volle Breite
+            self.haupt_row.width = None
 
     def _on_formular_change(self, e):
         """

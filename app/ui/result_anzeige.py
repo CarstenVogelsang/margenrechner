@@ -29,24 +29,24 @@ class ErgebnisAnzeige(ft.Container):
         """Initialisiert die Ergebnis-Anzeige."""
         super().__init__()
 
-        # Ergebnis-Felder (als Text-Widgets)
-        self.vk_netto_text = ft.Text("—", size=14, weight=ft.FontWeight.BOLD)
-        self.effektiver_ek_text = ft.Text("—", size=14, weight=ft.FontWeight.BOLD)
-        self.gesamtrabatt_text = ft.Text("—", size=14, weight=ft.FontWeight.BOLD)
-        self.rohertrag_euro_text = ft.Text("—", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.PRIMARY)
-        self.rohertrag_prozent_text = ft.Text("—", size=16, weight=ft.FontWeight.BOLD, color=ft.Colors.PRIMARY)
+        # Ergebnis-Felder (als Text-Widgets) - größere Fonts
+        self.vk_netto_text = ft.Text("—", size=18, weight=ft.FontWeight.BOLD)
+        self.effektiver_ek_text = ft.Text("—", size=18, weight=ft.FontWeight.BOLD)
+        self.gesamtrabatt_text = ft.Text("—", size=18, weight=ft.FontWeight.BOLD)
+        self.rohertrag_euro_text = ft.Text("—", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PRIMARY)
+        self.rohertrag_prozent_text = ft.Text("—", size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.PRIMARY)
 
-        # Ampel-Anzeige
-        self.ampel_widget = ui.erstelle_ampel_anzeige("rot", groesse=50)
+        # Ampel-Anzeige - größer und prominenter
+        self.ampel_widget = ui.erstelle_ampel_anzeige("rot", groesse=80)
         self.ampel_text = ft.Text(
             "",
-            size=14,
+            size=18,
             weight=ft.FontWeight.BOLD,
             text_align=ft.TextAlign.CENTER
         )
         self.ampel_beschreibung = ft.Text(
             "",
-            size=12,
+            size=14,
             color=ft.Colors.GREY_700,
             text_align=ft.TextAlign.CENTER
         )
@@ -122,7 +122,7 @@ class ErgebnisAnzeige(ft.Container):
             controls=[
                 ft.Text(
                     label + ":",
-                    size=14,
+                    size=16,
                     width=200
                 ),
                 ft.Container(
@@ -201,8 +201,8 @@ class ErgebnisAnzeige(ft.Container):
 
         farbe = farben.get(status.lower(), ft.Colors.GREY)
 
-        # Ampel-Widget aktualisieren
-        self.ampel_widget = ui.erstelle_ampel_anzeige(status, groesse=50)
+        # Ampel-Widget aktualisieren (größer)
+        self.ampel_widget = ui.erstelle_ampel_anzeige(status, groesse=80)
 
         # Text und Beschreibung setzen
         if status == "rot":

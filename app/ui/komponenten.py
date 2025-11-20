@@ -44,7 +44,8 @@ def erstelle_eingabefeld(
         on_change=on_change,
         keyboard_type=keyboard_type,
         width=breite,
-        text_size=14,
+        text_size=16,
+        label_style=ft.TextStyle(size=16),
         border_radius=8,
     )
 
@@ -87,6 +88,8 @@ def erstelle_dropdown(
         value=wert,
         on_change=on_change,
         width=breite,
+        text_size=16,
+        label_style=ft.TextStyle(size=16),
         border_radius=8,
     )
 
@@ -129,7 +132,7 @@ def erstelle_button(
 def erstelle_card(
     titel: Optional[str] = None,
     inhalt: Optional[ft.Control] = None,
-    padding: int = 20
+    padding: int = 24
 ) -> ft.Card:
     """
     Erstellt eine Material-Design Card.
@@ -137,7 +140,7 @@ def erstelle_card(
     Args:
         titel: Optionaler Titel der Card
         inhalt: UI-Inhalt der Card
-        padding: Innenabstand
+        padding: Innenabstand (Standard: 24px für mehr Luft)
 
     Returns:
         Flet Card Widget
@@ -149,7 +152,7 @@ def erstelle_card(
         card_inhalt.append(
             ft.Text(
                 titel,
-                size=20,
+                size=24,
                 weight=ft.FontWeight.BOLD,
                 color=ft.Colors.PRIMARY
             )
