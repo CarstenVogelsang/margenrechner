@@ -181,32 +181,64 @@ def erstelle_ampel_anzeige(
     groesse: int = 40
 ) -> ft.Container:
     """
-    Erstellt eine Ampel-Anzeige (rot/gelb/grün).
+    Erstellt eine echte Ampel-Anzeige mit 3 Farben (rot/gelb/grün).
+    Die aktive Farbe leuchtet hell, die anderen sind gedimmt.
 
     Args:
         status: Ampel-Status ("rot", "gelb", "grün")
-        groesse: Größe der Ampel in Pixeln
+        groesse: Größe jeder Ampel-Lampe in Pixeln
 
     Returns:
-        Flet Container mit Ampel
+        Flet Container mit 3-farbiger Ampel
     """
-    # Farb-Mapping
-    farben = {
-        "rot": ft.Colors.RED,
-        "gelb": ft.Colors.AMBER,
-        "grün": ft.Colors.GREEN,
-        "gruen": ft.Colors.GREEN,  # Alternative Schreibweise
-    }
+    status_lower = status.lower()
+    if status_lower == "gruen":
+        status_lower = "grün"
 
-    farbe = farben.get(status.lower(), ft.Colors.GREY)
+    # Intensität: aktive Farbe = 100%, inaktive = 20%
+    rot_opacity = 1.0 if status_lower == "rot" else 0.2
+    gelb_opacity = 1.0 if status_lower == "gelb" else 0.2
+    gruen_opacity = 1.0 if status_lower == "grün" else 0.2
 
     return ft.Container(
-        content=ft.Icon(
-            name=ft.Icons.CIRCLE,
-            color=farbe,
-            size=groesse
+        content=ft.Column(
+            controls=[
+                # Rot (oben)
+                ft.Container(
+                    content=ft.Icon(
+                        name=ft.Icons.CIRCLE,
+                        color=ft.Colors.RED,
+                        size=groesse,
+                        opacity=rot_opacity
+                    ),
+                    alignment=ft.alignment.center
+                ),
+                # Gelb (mitte)
+                ft.Container(
+                    content=ft.Icon(
+                        name=ft.Icons.CIRCLE,
+                        color=ft.Colors.AMBER,
+                        size=groesse,
+                        opacity=gelb_opacity
+                    ),
+                    alignment=ft.alignment.center
+                ),
+                # Grün (unten)
+                ft.Container(
+                    content=ft.Icon(
+                        name=ft.Icons.CIRCLE,
+                        color=ft.Colors.GREEN,
+                        size=groesse,
+                        opacity=gruen_opacity
+                    ),
+                    alignment=ft.alignment.center
+                ),
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            spacing=8
         ),
-        border_radius=groesse // 2,
+        alignment=ft.alignment.center,
+        padding=10
     )
 
 

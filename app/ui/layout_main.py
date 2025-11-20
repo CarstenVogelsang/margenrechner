@@ -66,14 +66,14 @@ class HauptLayout:
                 ft.Container(
                     content=self.formular,
                     col={"sm": 12, "md": 6, "lg": 6},
-                    padding=ft.padding.only(right=10)
+                    padding=ft.padding.symmetric(horizontal=5)
                 ),
 
                 # Rechte Spalte: Ergebnisse
                 ft.Container(
                     content=self.ergebnis,
                     col={"sm": 12, "md": 6, "lg": 6},
-                    padding=ft.padding.only(left=10)
+                    padding=ft.padding.symmetric(horizontal=5)
                 ),
             ],
             spacing=settings.SPACING_STANDARD,
