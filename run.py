@@ -42,9 +42,9 @@ if __name__ == "__main__":
 
     # View-Modus basierend auf Umgebung
     if is_production:
-        # Produktions-Deployment: Als reiner Web-Server ohne Browser
-        view_mode = ft.AppView.WEB_SERVER
-        print(f"🚀 Starting Flet in PRODUCTION mode (Web Server) on {host}:{port}")
+        # Produktions-Deployment: Als Flet-App (Web-Server ohne Browser)
+        view_mode = ft.AppView.FLET_APP
+        print(f"🚀 Starting Flet in PRODUCTION mode (Flet App) on {host}:{port}")
     else:
         # Lokale Entwicklung: Browser öffnet sich automatisch
         view_mode = ft.AppView.WEB_BROWSER
