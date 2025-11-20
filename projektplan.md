@@ -1,28 +1,30 @@
-# Phasenplanung Margen-Rechner
+# Versionsplanung Margen-Rechner
+
 # Eine produktdaten.org White-Label Anwendung
 
-Diese Markdown-Datei beschreibt die vollständige, priorisierte Entwicklungsplanung des Margen-Rechners als White-Label-Tool innerhalb des produktdaten.org Ökosystems.
+Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Margen-Rechners als White-Label-Tool innerhalb des produktdaten.org Ökosystems.
 
-## Gesamtpriorisierung (empfohlene Reihenfolge)
+---
 
-1. Impressum
-2. FAQ / Hilfe
-3. Dark/Light Mode
-4. EAN-Suche
-5. White-Label Theming
-6. Login über produktdaten.org
-7. Kalkulation speichern
-8. Kalkulation laden
-9. Excel-Export
-10. Barcode-Scanner 
-11. Händler-Defaults 
-12. Single Sign-On (SSO) Verbände, Drittfirmen
+# **Gesamtpriorisierung je Version**
 
+| Version | Inhalt                                                       |
+| ------- | ------------------------------------------------------------ |
+| **v1**  | Impressum, FAQ, Dark/Light Mode                              |
+| **v2**  | EAN-Suche                                                    |
+| **v3**  | White-Label Theming (Branding pro Kunde)                     |
+| **v4**  | Login über produktdaten.org                                  |
+| **v5**  | Kalkulation speichern, laden, Excel-Export                   |
+| **v6**  | Barcode-/QR-Scanner, Händler-Defaults                        |
+| **v7**  | SSO für Business-Kunden                                      |
+| **v8**  | Werbebanner (Partner-/Werbepartner-Modell)                   |
+| **v9**  | Monetarisierungsmodell, Stripe-Abos, Rollen & Berechtigungen |
 
+---
 
-## Phase 1 – Statische Grundfunktionen & UI-Basis
+# **v1 – Statische Grundfunktionen & UI-Basis**
 
-### 1. Impressumsseite
+### **1. Impressumsseite**
 
 * Menüpunkt mit *i*-Icon
 * Tooltip: „Impressum“
@@ -34,27 +36,26 @@ Diese Markdown-Datei beschreibt die vollständige, priorisierte Entwicklungsplan
 * Menüpunkt „FAQ“
 * Tooltip „FAQ“
 * Route `/faq`
-* Anzeigen als Accordion
-* Erste Inhalte:
+* Accordion-Anzeige
+* Inhalte über API (oder JSON):
 
-  * „Was ist Marge?“
-  * „Was bedeutet nachgelagert?“
+  * Was ist Marge?
+  * Was bedeutet nachgelagert?
 
-* Inhalte via API
-
-### 3. Light Mode / Dark Mode
+### **3. Light Mode / Dark Mode**
 
 * Umschalter im Menü
-* Speicherung zunächst im LocalStorage, später über User-Settings in produktdaten.org
-* Wechsel zwischen `ThemeMode.LIGHT` und `ThemeMode.DARK`
+* Lokale Speicherung (später user settings via API)
+* Wechsel zwischen `ThemeMode.LIGHT`/`ThemeMode.DARK`
 
+---
 
-## Phase 2 – Artikelsuche (EAN)
+# **v2 – Artikelsuche (EAN)**
 
-### 4. EAN-basierte Artikelsuche (Frontend)
+### **4. EAN-basierte Artikelsuche**
 
 * Eingabefeld „EAN suchen“
-* API-Call an produktdaten.org:
+* Request an produktdaten.org API:
 
   ```
   GET /api/v1/artikel/ean/{ean}
@@ -64,30 +65,30 @@ Diese Markdown-Datei beschreibt die vollständige, priorisierte Entwicklungsplan
   * Artikelbezeichnung
   * Hersteller
   * Herstellerartikelnummer
-  * Optional: Artikelbild
-* Keine eigene Datenhaltung
+  * Optional: Produktbild
 
-## Phase 3 – White-Label Theming (Branding pro Kunde)
+---
 
+# **v3 – White-Label Theming (Branding pro Kunde)**
 
-### 5. Dynamisches Theme-System
+### **5. Dynamisches Theme-System**
 
-* Zugriff per Subdomain:
+* Zugriff vorzugsweise per Subdomain:
 
   * `https://duo.produktdaten.org/margenrechner`
-* Oder Query-Parameter:
+* Alternativ per Query-Parameter:
 
   * `?theme=duo`
 
-### Theming lädt dynamisch:
+### **Zu ladende Theme-Daten:**
 
 * Logo
-* Primärfarbe / Sekundärfarbe
-* Textfarben
-* Impressumsdaten
-* Optionale kundenspezifische Anpassungen
+* Farben
+* Impressum des Business-Kunden
+* Footer-Branding je nach Partner
+* Optional: Compact/Embed-Modus
 
-### Technik:
+### **Technische Umsetzung**
 
 * Theme JSON Dateien:
 
@@ -97,87 +98,160 @@ Diese Markdown-Datei beschreibt die vollständige, priorisierte Entwicklungsplan
   /themes/evendo.json
   /themes/default.json
   ```
-* Alternativ API:
+* Oder API-Endpunkt:
 
   ```
   GET /api/theme/{key}
   ```
-* Dynamische Anpassung der UI-Komponenten
 
-## Phase 4 – Login & Speicherung über produktdaten.org
+---
 
-### 6. Login (ohne Registrierung in der App)
+# **v4 – Login über produktdaten.org**
 
-* Weiterleitung zum produktdaten.org Login
-* Rückgabe eines JWT Tokens
-* Token wird im LocalStorage gespeichert
-* Berechtigter Nutzer kann speichern/laden/exportieren
+### **6. Login / Auth**
 
-### 7. Kalkulation speichern
+* Weiterleitung zum produktdaten.org Login-System
+* Rückgabe JWT Token
+* Speicherung im LocalStorage
+* Nur eingeloggte Nutzer dürfen speichern/laden/exportieren
+
+---
+
+# **v5 – Speichern, Laden & Exportieren**
+
+### **7. Kalkulation speichern**
 
 * Button „Speichern“ (Save-Icon)
-* API-Call:
+* API:
 
   ```
   POST /api/margenrechner/kalkulationen
   ```
-* Body enthält:
+* Speicherung inkl.:
 
-  * EK, VK, Rabatte, MwSt
-  * berechnete Werte
-  * EAN (falls vorhanden)
-  * User-ID (aus Token)
+  * EK
+  * VK
+  * Rabatte
+  * MwSt
+  * Rabattmodus
+  * EAN
+  * berechnete Marge
 
-### 8. Kalkulation laden
+### **8. Kalkulation laden**
 
 * Button „Kalkulation laden“ (Load-Icon)
-* UI zeigt Liste der gespeicherten Kalkulationen
+* UI zeigt gespeicherte Einträge an
 * API:
 
   ```
   GET /api/margenrechner/kalkulationen
   ```
-* Klick → Werte werden ins UI geladen
 
----
+### **9. Excel-Export**
 
-## Phase 5 – Export
-
-### 9. Excel-Export
-
-* Button „Exportieren“ (Download-Icon)
+* Button „Exportieren“
 * API-Endpunkt:
 
   ```
   GET /api/margenrechner/kalkulationen/export
   ```
-* Exportformat `.xlsx`
-* Inhalt:
-
-  * Alle gespeicherten Kalkulationen pro User
-  * EAN, Bezeichnung, EK, VK, Rabatte, Modus, Marge €, Marge %, Datum
-
-Falls API noch nicht vorhanden: lokaler Export per Flet + openpyxl.
+* Falls API noch nicht existiert: lokaler Export mittels openpyxl
 
 ---
 
-## Phase 6 – Optionale Erweiterungen
+# **v6 – Optional: Erweiterte Funktionen**
 
-### 10. Barcode-/QR-Scanner
+### **10. Barcode-/QR-Scanner**
 
-* Kamera-Scanner (Web)
-* Scanner-Modus (Mobile / App)
-* Bluetooth-Handscanner (Keyboard-Input)
+* Webkamera-Scanner
+* Mobile/Android-Scanner via Flet
+* Bluetooth-Handscanner
 
-### 11. Händler-Defaults aus Produktdatenbank
+### **11. Händler-Defaults aus Produktdatenbank**
 
-* Rabatte / MwSt / Profile pro Händler
-* Automatisches Vorbefüllen
+* Standard-Rabatte, MwSt, Konditionen
+* Automatisiertes Vorbefüllen
 
-### 12. Single Sign-On für Verbände / Händlergruppen
+---
 
-* SSO mit gruppenspezifischen Rechten
+# **v7 – Single Sign-On (SSO) für Business-Kunden**
 
+### **12. SSO Integration**
 
+* Mitglieder/Kunden von Business-Kunden können sich ohne extra Konto einloggen
+* Kostenpflichtiges Feature je Business-Kunden-Instanz
 
+---
 
+# **v8 – Werbebanner-System (White-Label & Partnerbasiert)**
+
+### **13. Einblendbare Werbebanner**
+
+* API liefert aktiven Werbebanner je Business-Kunde oder Partner:
+
+  ```
+  GET /api/margenrechner/banner/{business_kunde_key}
+  ```
+* Inhalte des Banners:
+
+  * Bild-URL
+  * Link-URL
+  * Tracking-Key
+  * Laufzeiten / Aktivierungsstatus
+* Darstellung als Kopfzeilen- oder Footer-Banner
+* Partner kann Werbepartner freischalten
+
+---
+
+# **v9 – Rollenmodell & Monetarisierungsmodell (Stripe Abo)**
+
+## **Rollenmodell im produktdaten.org Ökosystem**
+
+### **1. Betreiber (pdo – produktdaten.org)**
+
+* Eigentümer der Plattform und der Tools
+* Default-Partner, wenn kein anderer Partner definiert ist
+* Verantwortlich für Abrechnung (Stripe)
+
+### **2. Partner (z. B. e-vendo)**
+
+* Wird im Footer angezeigt („präsentiert von e-vendo“)
+* Kann Business-Kunden betreuen und Lizenzen weitergeben
+* Partner kann Werbebanner für Business-Kunden aktivieren
+* Partner ist selbst ebenfalls Business-Kunde (mit eigener Instanz)
+
+### **3. Business-Kunden (duo, Verbände, Unternehmen)**
+
+* Buchen eine instanzbasierte White-Label-Version der App
+* 1 Business-Kunde = 1 kostenpflichtige Instanz
+* Können Tool auf ihrer Website einbetten oder verlinken
+* Nutzen Partner als Abwickler und Hauptkontakt
+* Optional: SSO für ihre eigenen Endkunden/Mitglieder
+
+### **4. Endkunden (Händler, Filialen, Mitarbeiter)**
+
+* Nutzen die App im Browser
+* Wenn sie Kunde eines Business-Kunden sind → SSO möglich
+
+### **5. Werbepartner**
+
+* Werben innerhalb des Margen-Rechners
+* Freischaltung durch Partner
+* Einnahmen fließen an Betreiber (pdo)
+
+---
+
+## **Monetarisierbare Funktionen über Stripe**
+
+| Feature                           | Beschreibung                                      | Abrechnung               |
+| --------------------------------- | ------------------------------------------------- | ------------------------ |
+| **Business-Kunden-Instanz**       | White-Label-Version für einen Verband / Firma     | Monatliche Grundgebühr   |
+| **Partner-Abo**                   | Partner darf Weitergabe + Branding vornehmen      | Monatliche Partnergebühr |
+| **SSO Add-on**                    | Single Sign-On für Mitglieder des Business-Kunden | Aufpreis pro BK-Instanz  |
+| **Werbebanner-Paket**             | Aktivierbare Bannerflächen                        | Paketpreis oder CPM      |
+| **Premium API Nutzung**           | Erweiterter Datenzugriff via produktdaten.org     | API-Tarife               |
+| **Speicherung von Kalkulationen** | Cloud-Speicher für User                           | Optionales Add-on        |
+
+---
+
+Diese Versionsplanung stellt die vollständige technische, organisatorische und geschäftliche Roadmap des Margen-Rechners für das produktdaten.org Ökosystem dar.

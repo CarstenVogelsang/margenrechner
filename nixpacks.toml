@@ -1,0 +1,13 @@
+# Nixpacks Konfiguration für Margen-Rechner
+
+[phases.setup]
+nixPkgs = ["python313", "pip"]
+
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = "python run.py"
