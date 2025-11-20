@@ -254,7 +254,7 @@ def erstelle_ampel_anzeige(
         ),
         # Helles Gehäuse mit dunkelgrauem Rahmen
         bgcolor=ft.Colors.GREY_300,
-        border=ft.border.all(6, ft.Colors.GREY_500),
+        border=ft.border.all(0, ft.Colors.GREY_500),
         border_radius=10,
         padding=10,
         alignment=ft.alignment.center
