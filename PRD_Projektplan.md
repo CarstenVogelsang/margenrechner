@@ -10,7 +10,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 | Version | Inhalt                                                       |
 | ------- | ------------------------------------------------------------ |
-| **v1**  | Impressum, FAQ, Dark/Light Mode                              |
+| **v1**  | Kleine Fixes,Impressum, FAQ, Dark/Light Mode                              |
 | **v2**  | EAN-Suche                                                    |
 | **v3**  | White-Label Theming (Branding pro Kunde)                     |
 | **v4**  | Login über produktdaten.org                                  |
@@ -18,7 +18,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 | **v6**  | Barcode-/QR-Scanner, Händler-Defaults                        |
 | **v7**  | SSO für Business-Kunden                                      |
 | **v8**  | Werbebanner (Partner-/Werbepartner-Modell)                   |
-| **v9**  | Monetarisierungsmodell, Stripe-Abos, Rollen & Berechtigungen |
+
 
 ---
 
@@ -52,7 +52,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v2 – Artikelsuche (EAN)**
 
-### **4. EAN-basierte Artikelsuche**
+### EAN-basierte Artikelsuche
 
 * Eingabefeld „EAN suchen“
 * Request an produktdaten.org API:
@@ -71,7 +71,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v3 – White-Label Theming (Branding pro Kunde)**
 
-### **5. Dynamisches Theme-System**
+### Dynamisches Theme-System
 
 * Zugriff vorzugsweise per Subdomain:
 
@@ -108,7 +108,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v4 – Login über produktdaten.org**
 
-### **6. Login / Auth**
+### Login / Authentifizierung via produktdaten.org
 
 * Weiterleitung zum produktdaten.org Login-System
 * Rückgabe JWT Token
@@ -119,7 +119,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v5 – Speichern, Laden & Exportieren**
 
-### **7. Kalkulation speichern**
+### Kalkulation speichern
 
 * Button „Speichern“ (Save-Icon)
 * API:
@@ -137,7 +137,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
   * EAN
   * berechnete Marge
 
-### **8. Kalkulation laden**
+### Kalkulation laden
 
 * Button „Kalkulation laden“ (Load-Icon)
 * UI zeigt gespeicherte Einträge an
@@ -147,7 +147,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
   GET /api/margenrechner/kalkulationen
   ```
 
-### **9. Excel-Export**
+### Excel-Export
 
 * Button „Exportieren“
 * API-Endpunkt:
@@ -161,13 +161,13 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v6 – Optional: Erweiterte Funktionen**
 
-### **10. Barcode-/QR-Scanner**
+### Barcode-/QR-Scanner
 
 * Webkamera-Scanner
 * Mobile/Android-Scanner via Flet
 * Bluetooth-Handscanner
 
-### **11. Händler-Defaults aus Produktdatenbank**
+### Händler-Defaults aus Produktdatenbank
 
 * Standard-Rabatte, MwSt, Konditionen
 * Automatisiertes Vorbefüllen
@@ -176,7 +176,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v7 – Single Sign-On (SSO) für Business-Kunden**
 
-### **12. SSO Integration**
+### SSO Integration
 
 * Mitglieder/Kunden von Business-Kunden können sich ohne extra Konto einloggen
 * Kostenpflichtiges Feature je Business-Kunden-Instanz
@@ -185,7 +185,7 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
 
 # **v8 – Werbebanner-System (White-Label & Partnerbasiert)**
 
-### **13. Einblendbare Werbebanner**
+### Einblendbare Werbebanner
 
 * API liefert aktiven Werbebanner je Business-Kunde oder Partner:
 
@@ -200,58 +200,3 @@ Diese Datei beschreibt die vollständige, priorisierte Versionsplanung des Marge
   * Laufzeiten / Aktivierungsstatus
 * Darstellung als Kopfzeilen- oder Footer-Banner
 * Partner kann Werbepartner freischalten
-
----
-
-# **v9 – Rollenmodell & Monetarisierungsmodell (Stripe Abo)**
-
-## **Rollenmodell im produktdaten.org Ökosystem**
-
-### **1. Betreiber (pdo – produktdaten.org)**
-
-* Eigentümer der Plattform und der Tools
-* Default-Partner, wenn kein anderer Partner definiert ist
-* Verantwortlich für Abrechnung (Stripe)
-
-### **2. Partner (z. B. e-vendo)**
-
-* Wird im Footer angezeigt („präsentiert von e-vendo“)
-* Kann Business-Kunden betreuen und Lizenzen weitergeben
-* Partner kann Werbebanner für Business-Kunden aktivieren
-* Partner ist selbst ebenfalls Business-Kunde (mit eigener Instanz)
-
-### **3. Business-Kunden (duo, Verbände, Unternehmen)**
-
-* Buchen eine instanzbasierte White-Label-Version der App
-* 1 Business-Kunde = 1 kostenpflichtige Instanz
-* Können Tool auf ihrer Website einbetten oder verlinken
-* Nutzen Partner als Abwickler und Hauptkontakt
-* Optional: SSO für ihre eigenen Endkunden/Mitglieder
-
-### **4. Endkunden (Händler, Filialen, Mitarbeiter)**
-
-* Nutzen die App im Browser
-* Wenn sie Kunde eines Business-Kunden sind → SSO möglich
-
-### **5. Werbepartner**
-
-* Werben innerhalb des Margen-Rechners
-* Freischaltung durch Partner
-* Einnahmen fließen an Betreiber (pdo)
-
----
-
-## **Monetarisierbare Funktionen über Stripe**
-
-| Feature                           | Beschreibung                                      | Abrechnung               |
-| --------------------------------- | ------------------------------------------------- | ------------------------ |
-| **Business-Kunden-Instanz**       | White-Label-Version für einen Verband / Firma     | Monatliche Grundgebühr   |
-| **Partner-Abo**                   | Partner darf Weitergabe + Branding vornehmen      | Monatliche Partnergebühr |
-| **SSO Add-on**                    | Single Sign-On für Mitglieder des Business-Kunden | Aufpreis pro BK-Instanz  |
-| **Werbebanner-Paket**             | Aktivierbare Bannerflächen                        | Paketpreis oder CPM      |
-| **Premium API Nutzung**           | Erweiterter Datenzugriff via produktdaten.org     | API-Tarife               |
-| **Speicherung von Kalkulationen** | Cloud-Speicher für User                           | Optionales Add-on        |
-
----
-
-Diese Versionsplanung stellt die vollständige technische, organisatorische und geschäftliche Roadmap des Margen-Rechners für das produktdaten.org Ökosystem dar.

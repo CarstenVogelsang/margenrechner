@@ -3,7 +3,7 @@
 # Stakeholder-, Rollen- und Geschäftsmodell-Dokument für produktdaten.org Tools
 
 Dieses Dokument definiert das Rollenmodell, das Multi-Tenant-Betriebsmodell, die White-Label-Mechanik sowie die Monetarisierungsstruktur für alle aktuellen und zukünftigen produktdaten.org Tools (beginnend mit dem Margen-Rechner).
-Es bildet die Grundlage für alle Funktions- und Versionspläne (z. B. v1–v8 des Margen-Rechners) und wird NICHT als Feature- oder Versionsbestandteil betrachtet.
+Es bildet die Grundlage für alle Funktions- und Versionspläne (z. B. v1–v8 des Margen-Rechners) und wird NICHT als Feature- oder Versionsbestandteil betrachtet.
 
 ---
 
@@ -35,9 +35,9 @@ Ziel: **Klare Grundlage für alle White-Label-Anwendungen** im produktdaten.org 
 
 ---
 
-## 2.2 Partner (z. B. e-vendo)
+## 2.2 Partner (z. B. e-vendo oder andere "Technologiepartner")
 
-* Offizielle Vertriebspartner von produktdaten.org
+* Offizielle Partner von produktdaten.org
 * Können Tools an eigene Business-Kunden weitergeben
 * Jede Partner-Instanz hat Branding im Footer:
   "präsentiert von PARTNERNAME" + Partner-Logo + Partner-Link
@@ -59,9 +59,9 @@ Beispiele: duo, vedes, Händlergruppen, große Händler, Verbände.
 * 1 Business-Kunde = 1 kostenpflichtige Instanz
 * Kann White-Label-Tools auf der eigenen Website einbetten oder verlinken
 * Business-Kunde wird einem Partner zugeordnet (oder pdo direkt)
-* Optionales Feature: **SSO für Mitglieder**
+* Optionales Feature: **SSO für Mitglieder**; z.B. wenn duo Mitglied im duo Extranet eingeloggt ist, dann wird er bei Klick auf den Margen-Rechner dort auch automatisch angemeldet
 * Optional: Werbebanner der Partner/Werbepartner anzeigen
-* Optional: Konfiguration für Händler-Defaults (Rabatte, MwSt, Konditionen)
+* Optional: Konfiguration für Händler-Defaults
 
 ---
 
@@ -87,7 +87,7 @@ Beispiele: duo, vedes, Händlergruppen, große Händler, Verbände.
 
 * Dürfen Banner im Tool schalten
 * Freischaltung erfolgt über Partner
-* Einnahmen gehen direkt an pdo (Abrechnung über Partner/BK separat)
+* Einnahmen gehen direkt an pdo bzw. werden mit Partnern geteilt (Abrechnung über Partner/BK separat)
 * Mehrere Bannerzonen möglich (Kopfzeile, Footer)
 
 ---
@@ -149,8 +149,8 @@ oder statische JSON-Dateien pro Mandant.
 | ------------------- | ------------------------------ | ---------------------- | --------------------------- | --------------- | ---------------- |
 | **pdo (Betreiber)** | ✓                              | ✓                      | ✓                           | ✓               | ✓                |
 | **Partner**         | ✓                              | ✗                      | ✓ (für BK)                  | ✓ (für BK)      | ✓ (für BK)       |
-| **Business-Kunde**  | ✗                              | ✗                      | ✓ (nur eigene Werbepartner) | ✓ (für Instanz) | ✓ (für Instanz)  |
-| **Werbepartner**    | ✗                              | ✗                      | nur freigeschaltete Banner  | ✗               | ✗                |
+| **Business-Kunde**  | ✗                              | ✗                      | ✓ (nur eigene) | ✓ (für Instanz) | ✓ (für Instanz)  |
+| **Werbepartner**    | ✗                              | ✗                      | erhält Reports  | ✗               | ✗                |
 | **Endkunden**       | ✗                              | ✗                      | sehen Banner                | ✗               | ✗                |
 
 ---
@@ -163,7 +163,7 @@ Alle Einnahmen werden über produktdaten.org als Stripe-Abo abgewickelt.
 
 #### **1. Business-Kunden-Instanz (monatlich)**
 
-* Basispreis pro Instanz
+* Basispreis pro Instanz; wird bei Aktivierung fällig
 * Enthält: White-Label-Branding, Bereitstellung der Tools
 
 #### **2. Partner-Abo (monatlich)**
@@ -185,9 +185,9 @@ Alle Einnahmen werden über produktdaten.org als Stripe-Abo abgewickelt.
 
 #### **5. Premium API Nutzung**
 
-* Optional (wenn Tools API-Minuten benötigen)
+* Optional (wenn Tools API-Zugriff benötigen)
 
-#### **6. Optional: Cloud-Speicherung von Kalkulationen**
+#### **6. Optional: Cloud-Speicherung von Händler-Kalkulationen**
 
 * Erhöhtes Kontingent oder zusätzlicher Speicher
 
@@ -199,7 +199,7 @@ Alle Einnahmen werden über produktdaten.org als Stripe-Abo abgewickelt.
 
 * Abhängig vom Mandanten (Business-Kunde), nicht global
 * Partner kann festlegen, ob Banner erlaubt sind
-* Werbepartner bekommen API-Zugang für ihren Banner
+* Werbepartner bekommen Zugang für Verwaltung ihrer Banner
 
 ### API Beispiel:
 
@@ -217,8 +217,7 @@ Antwort enthält:
 
 ### Banner-Slots:
 
-* Kopfzeile
-* Unterhalb der Navigationsleiste
+* Kopf
 * Footer
 
 ---
@@ -229,12 +228,8 @@ Antwort enthält:
 
 ### Ablauf:
 
-1. Business-Kunde schaltet SSO im Stripe-Abo frei
-2. Business-Kunde hinterlegt SSO-Einstellungen:
-
-   * Identity Provider URL
-   * Sign-Zertifikat
-   * Redirect URLs
+1. Partner schaltet SSO für Instanz (Business-Kunde) im Stripe-Abo frei
+2. Partner/Business-Kunde hinterlegt SSO-Einstellungen
 3. Nutzer kommt von der BK-Website → wird via SSO authentifiziert
 4. Tool erhält Token und lädt personalisierte Daten
 
@@ -261,6 +256,7 @@ Eine Instanz = eine Business-Kunden-Lizenz.
 * Konfiguration
 * Berechtigungen
 * Links zum Partner
+* (optional) Händler-Kalkulationen
 
 **Nicht** instanzspezifisch sind:
 
@@ -275,10 +271,10 @@ Eine Instanz = eine Business-Kunden-Lizenz.
 pdo (Betreiber)
   ├── Partner A (e-vendo)
   │       ├── Business-Kunde 1 (duo)
-  │       ├── Business-Kunde 2
-  │       └── Business-Kunde 3
-  ├── Partner B
-  └── Partner C
+  │       ├── Business-Kunde 2 (Verband X)
+  │       └── Business-Kunde 3 (MHI) 
+  ├── Partner B (Breimeir)
+  └── Partner C (Thomas Moritz)
 ```
 
 Ein Partner ist gleichzeitig ein Business-Kunde, besitzt also:
@@ -299,3 +295,30 @@ Dieses Stakeholder- und Rollenmodell bildet das Fundament für:
 * zukünftige Erweiterungen (SSO, Banner, Partner-Level, Händler-Defaults)
 
 Alle Versionspläne (z. B. Margen-Rechner v1–v8) bauen funktional auf diesem Dokument auf.
+
+---
+
+# 12. Architekturdiagramm (Mermaid)
+
+```mermaid
+graph TD
+    PDO["PDO<br/>Betreiber"]
+    WERBE["Werbepartner"]
+    PARTNER["Partner<br/>(z. B. e-vendo)"]
+    BK["Business-Kunden<br/>(duo, Verbände, Unternehmen)"]
+    ENDKUNDE["Endkunden<br/>(Händler, Mitglieder, Besucher)"]
+    APP["WebApp Margen-Rechner"]
+   
+    WERBE -->|Banner-Werbevertrag| PDO
+    WERBE -->|können sich in BK Instanz einbuchen| PARTNER
+
+    PARTNER -->|Partner-ABO Stripe| PDO
+    PARTNER -->|verwalten BK Instanz| BK
+
+    BK -->|Liefern Tools via Link/Embed| ENDKUNDE
+    PDO -->|spielt Bannerwerbung aus| APP
+    
+    ENDKUNDE -->|SSO Login über Business-Kunde| BK
+    ENDKUNDE -->|nutzen Tool anonym oder mit Konto| APP    
+    
+```
