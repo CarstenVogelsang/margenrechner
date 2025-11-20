@@ -1,0 +1,13 @@
+# Margen-Rechner - Python Dependencies
+# Installieren mit: pip install -r requirements.txt
+
+# Haupt-Framework
+flet>=0.24.0
+
+# Für zukünftige API-Integration (auskommentiert, da noch nicht verwendet)
+# aiohttp>=3.9.0
+# requests>=2.31.0
+
+# Für zukünftige Barcode-Erkennung (auskommentiert, da noch nicht verwendet)
+# opencv-python>=4.8.0
+# pyzbar>=0.1.9
