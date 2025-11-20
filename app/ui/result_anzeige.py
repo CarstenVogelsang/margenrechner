@@ -115,6 +115,9 @@ class ErgebnisAnzeige(ft.Container):
         Returns:
             Row mit Label und Wert
         """
+        # Wert-Widget rechtsbündig ausrichten
+        wert_widget.text_align = ft.TextAlign.RIGHT
+
         return ft.Row(
             controls=[
                 ft.Text(
@@ -122,7 +125,11 @@ class ErgebnisAnzeige(ft.Container):
                     size=14,
                     width=200
                 ),
-                wert_widget
+                ft.Container(
+                    content=wert_widget,
+                    expand=True,
+                    alignment=ft.alignment.center_right
+                )
             ],
             spacing=10
         )
